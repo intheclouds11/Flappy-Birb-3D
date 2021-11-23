@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
@@ -31,19 +30,6 @@ public class Movement : MonoBehaviour
     {
         ApplyFlap();
         PlayerInputRotate();
-    }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Finish"))
-        {
-            Invoke("ResetLevel", 2f);
-        }
-    }
-
-    private void ResetLevel()
-    {
-        SceneManager.LoadScene(0);
     }
 
     // GetKeyDown does something at the single frame the key is pressed at (tap)

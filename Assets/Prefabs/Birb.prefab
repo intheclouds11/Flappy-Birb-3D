@@ -95,7 +95,9 @@ GameObject:
   - component: {fileID: 8200540921697589377}
   - component: {fileID: 1339629773}
   - component: {fileID: 1339629772}
+  - component: {fileID: 6804627156034562805}
   - component: {fileID: 1351459326}
+  - component: {fileID: 1611964979}
   m_Layer: 0
   m_Name: Birb
   m_TagString: Untagged
@@ -170,6 +172,20 @@ MonoBehaviour:
   boostAmount: 1500
   flapStrength: 15000
   rotateAmount: 100
+  flapBoostSFX: {fileID: 8300000, guid: b2f1f3996499d8c4199151793b3c9b3d, type: 3}
+  flapTapSFX: {fileID: 8300000, guid: 77851d09d9b79cd4d924baba5587976e, type: 3}
+--- !u!114 &6804627156034562805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011970335040914136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a342fdc472e25a41b9af83a67a29bfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!82 &1351459326
 AudioSource:
   m_ObjectHideFlags: 0
@@ -180,7 +196,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e7ee5e5afdf380f40b64b124993fed46, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -190,9 +206,9 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 0.9958699
   MaxDistance: 500
-  Pan2D: 0
+  Pan2D: -0.22
   rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
@@ -266,3 +282,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!167 &1611964979
+AudioReverbZone:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011970335040914136}
+  m_Enabled: 1
+  m_MinDistance: 10
+  m_MaxDistance: 15
+  m_ReverbPreset: 10
+  m_Room: -1000
+  m_RoomHF: -698
+  m_DecayTime: 7.24
+  m_DecayHFRatio: 0.33
+  m_Reflections: -1166
+  m_ReflectionsDelay: 0.02
+  m_Reverb: 16
+  m_ReverbDelay: 0.03
+  m_HFReference: 5000
+  m_Diffusion: 100
+  m_Density: 100
+  m_LFReference: 250
+  m_RoomLF: 0
