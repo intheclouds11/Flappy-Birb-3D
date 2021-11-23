@@ -9,7 +9,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private float boostAmount = 0.05f;
     [SerializeField] private float flapStrength = 100f;
     [SerializeField] private float rotateAmount = 1f;
-    private AudioSource _audioSource;
+    private AudioSource audioSource;
     [SerializeField] AudioClip flapBoostSFX;
     [SerializeField] AudioClip flapTapSFX;
     private bool hasFlapped = false;
@@ -18,8 +18,8 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        _audioSource = GetComponent<AudioSource>();
-        _audioSource.Stop();
+        audioSource = GetComponent<AudioSource>();
+        audioSource.Stop();
     }
 
     void Update() // do Input and Graphics updates here
@@ -55,26 +55,27 @@ public class Movement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             hasFlapped = true;
-            _audioSource.clip = flapTapSFX;
-            _audioSource.Stop();
-            _audioSource.PlayOneShot(flapTapSFX);
+            audioSource.clip = flapTapSFX;
+            audioSource.Stop();
+            audioSource.Play();
         }
 
         // Boost
         if (Input.GetKey(KeyCode.B))
         {
             rb.AddRelativeForce(Vector3.up * boostAmount * Time.deltaTime);
-            _audioSource.clip = flapBoostSFX;
+            audioSource.clip = flapBoostSFX;
 
-            if (!_audioSource.isPlaying)
+            if (!audioSource.isPlaying)
             {
-                _audioSource.Play();
+                audioSource.Play();
             }
         }
 
+        // Stop 
         if (Input.GetKeyUp(KeyCode.B))
         {
-            _audioSource.Stop();
+            audioSource.Stop();
         }
     }
 
