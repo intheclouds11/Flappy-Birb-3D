@@ -1015,6 +1015,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1339629772, guid: 59b42bccb63736241b663fd52e69d8ac, type: 3}
+      propertyPath: rotateAmount
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 951425511843487014, guid: 59b42bccb63736241b663fd52e69d8ac, type: 3}
       propertyPath: m_RootOrder
       value: 3

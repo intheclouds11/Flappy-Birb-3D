@@ -10,12 +10,12 @@ public class CollisionHandler : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ground"))
         {
-            Invoke("ResetLevel", 2f);
+            Invoke("ResetScene", 2f);
         }
 
         if (other.gameObject.CompareTag("Finish"))
         {
-            Invoke("ResetLevel", 2f);
+            Invoke("NextScene", 2f);
             // particles
         }
     }
@@ -25,11 +25,25 @@ public class CollisionHandler : MonoBehaviour
         if (other.gameObject.CompareTag("Feather"))
         {
             Destroy(other.gameObject);
+            // refill boost
         }
     }
 
-    private void ResetLevel()
+    private void ResetScene()
     {
-        SceneManager.LoadScene(0);
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex);
+    }
+
+    private void NextScene()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
+        {
+            nextSceneIndex = 0;
+        }
+
+        SceneManager.LoadScene(nextSceneIndex);
     }
 }
