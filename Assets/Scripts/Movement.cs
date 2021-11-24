@@ -8,17 +8,20 @@ public class Movement : MonoBehaviour
     [SerializeField] private float boostAmount = 0.05f;
     [SerializeField] private float flapStrength = 100f;
     [SerializeField] private float rotateAmount = 1f;
-    private AudioSource audioSource;
-    [SerializeField] AudioClip flapBoostSFX;
+
+    private AudioSource[] audioSources;
+    private AudioSource audioSourceMovement;
     [SerializeField] AudioClip flapTapSFX;
-    private bool hasFlapped = false;
+    [SerializeField] private AudioClip flapBoostSFX;
     private Rigidbody rb;
+
+    private bool hasFlapped = false;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        audioSource = GetComponent<AudioSource>();
-        audioSource.Stop();
+        audioSources = GetComponents<AudioSource>();
+        audioSourceMovement = audioSources[0];
     }
 
     void Update() // do Input and Graphics updates here
@@ -41,27 +44,27 @@ public class Movement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             hasFlapped = true;
-            audioSource.clip = flapTapSFX;
-            audioSource.Stop();
-            audioSource.Play();
+            audioSourceMovement.clip = flapTapSFX;
+            audioSourceMovement.Stop();
+            audioSourceMovement.Play();
         }
 
         // Boost
         if (Input.GetKey(KeyCode.B))
         {
             rb.AddRelativeForce(Vector3.up * boostAmount * Time.deltaTime);
-            audioSource.clip = flapBoostSFX;
+            audioSourceMovement.clip = flapBoostSFX;
 
-            if (!audioSource.isPlaying)
+            if (!audioSourceMovement.isPlaying)
             {
-                audioSource.Play();
+                audioSourceMovement.Play();
             }
         }
 
         // Stop 
         if (Input.GetKeyUp(KeyCode.B))
         {
-            audioSource.Stop();
+            audioSourceMovement.Stop();
         }
     }
 
