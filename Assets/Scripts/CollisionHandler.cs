@@ -14,6 +14,7 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] AudioClip finishSFX;
     [SerializeField] AudioClip crashSFX;
     [SerializeField] AudioClip pickupSFX;
+    [SerializeField] ParticleSystem explosionParticles;
 
     private bool isTransitioning = false;
 
@@ -38,7 +39,7 @@ public class CollisionHandler : MonoBehaviour
 
         if (other.gameObject.CompareTag("Finish"))
         {
-            FinishSequence();
+            FinishSequence(other.gameObject);
         }
     }
 
@@ -48,19 +49,18 @@ public class CollisionHandler : MonoBehaviour
         audioSourceMovement.Stop();
         audioSourceCollisions.PlayOneShot(crashSFX);
         GetComponent<Movement>().enabled = false; // disable controls when crash
-
-        // TODO - add particle vfx
-
+        explosionParticles.Play();
         Invoke("ResetScene", sceneChangeDelay);
     }
 
-    private void FinishSequence()
+    private void FinishSequence(GameObject other)
     {
         isTransitioning = true;
         audioSourceMovement.Stop();
         audioSourceCollisions.PlayOneShot(finishSFX);
 
         // TODO - add particle vfx
+        other.GetComponentInChildren<ParticleSystem>().Play();
 
         Invoke("NextScene", sceneChangeDelay);
     }
@@ -76,9 +76,9 @@ public class CollisionHandler : MonoBehaviour
     private void PickupFeather(Collider other)
     {
         // TODO - refill boost
-        // TODO - feather vfx
+        other.GetComponentInChildren<ParticleSystem>().Play();
         audioSourceCollisions.PlayOneShot(pickupSFX);
-        Destroy(other.gameObject);
+        //Destroy(other.gameObject);
     }
 
     private void ResetScene()
