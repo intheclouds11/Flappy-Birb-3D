@@ -25,6 +25,14 @@ public class CollisionHandler : MonoBehaviour
         audioSourceCollisions = audioSources[1];
     }
 
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.L)) // CHEAT - skip level
+        {
+            NextScene();
+        }
+    }
+
     private void OnCollisionEnter(Collision other)
     {
         if (isTransitioning)
@@ -73,9 +81,12 @@ public class CollisionHandler : MonoBehaviour
     private void PickupFeather(Collider other)
     {
         // TODO - refill boost and add boost limit
+        
+        other.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        other.gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        
         other.GetComponentInChildren<ParticleSystem>().Play();
         audioSourceCollisions.PlayOneShot(pickupSFX);
-        //Destroy(other.gameObject);
     }
 
     private void ResetScene()

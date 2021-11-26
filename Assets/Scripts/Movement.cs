@@ -9,7 +9,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private float flapStrength = 100f;
     [SerializeField] private float rotateAmount = 1f;
 
-    private AudioSource[] audioSources;  // only used to grab the first AudioSource component
+    private AudioSource[] audioSources; // only used to grab the first AudioSource component
     private AudioSource audioSourceMovement;
     private AudioSource audioSourceCollisions;
     [SerializeField] AudioClip flapTapSFX;
@@ -18,6 +18,7 @@ public class Movement : MonoBehaviour
     private Rigidbody rb;
 
     private bool hasFlapped = false;
+    private bool isNoClip = false;
 
     void Start()
     {
@@ -29,55 +30,45 @@ public class Movement : MonoBehaviour
 
     void Update() // do Input and Graphics updates here
     {
-        PlayerInputFlap();
+        PlayerInputForce();
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (!isNoClip)
+            {
+                GetComponentInChildren<BoxCollider>().enabled = false;
+                isNoClip = true;
+            }
+            else
+            {
+                GetComponentInChildren<BoxCollider>().enabled = true;
+                isNoClip = false;
+            }
+        }
     }
 
     private void FixedUpdate() // do Physics engine updates here
     {
-        ApplyFlap();
         PlayerInputRotate();
+        ApplyFlapForce();
     }
 
-    // GetKeyDown does something at the single frame the key is pressed at. ("tap")
-    // GetKey does something as long as the key is pressed. ("hold")
-
-    void PlayerInputFlap()
+    void PlayerInputForce()
     {
-        // Flap
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            hasFlapped = true;
-            audioSourceMovement.clip = flapTapSFX;
-            audioSourceMovement.Stop();
-            audioSourceMovement.Play();
+            hasFlapped = true; // triggers ApplyFlapForce()
+            FlapAudio();
         }
 
-        // Boost
         if (Input.GetKey(KeyCode.B))
         {
-            rb.AddRelativeForce(Vector3.up * boostAmount * Time.deltaTime);
-            audioSourceMovement.clip = flapBoostSFX;
-            flapBoostParticles.Play();
-
-            if (!audioSourceMovement.isPlaying)
-            {
-                audioSourceMovement.Play();
-            }
+            ApplyBoostForce();
         }
 
-        // Stop 
+        // Stop boost audio
         if (Input.GetKeyUp(KeyCode.B))
         {
             audioSourceMovement.Stop();
-        }
-    }
-
-    void ApplyFlap()
-    {
-        if (hasFlapped)
-        {
-            hasFlapped = false;
-            rb.AddRelativeForce(Vector3.up * flapStrength * Time.deltaTime);
         }
     }
 
@@ -94,6 +85,34 @@ public class Movement : MonoBehaviour
         {
             ApplyRotation(-rotateAmount);
         }
+    }
+
+    void ApplyFlapForce()
+    {
+        if (hasFlapped)
+        {
+            hasFlapped = false;
+            rb.AddRelativeForce(Vector3.up * flapStrength * Time.deltaTime);
+        }
+    }
+
+    void ApplyBoostForce()
+    {
+        rb.AddRelativeForce(Vector3.up * boostAmount * Time.deltaTime);
+        audioSourceMovement.clip = flapBoostSFX;
+        flapBoostParticles.Play();
+
+        if (!audioSourceMovement.isPlaying)
+        {
+            audioSourceMovement.Play();
+        }
+    }
+
+    void FlapAudio()
+    {
+        audioSourceMovement.clip = flapTapSFX;
+        audioSourceMovement.Stop();
+        audioSourceMovement.Play();
     }
 
     private void ApplyRotation(float rotationFactor)
