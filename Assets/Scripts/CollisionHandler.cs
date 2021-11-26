@@ -58,10 +58,7 @@ public class CollisionHandler : MonoBehaviour
         isTransitioning = true;
         audioSourceMovement.Stop();
         audioSourceCollisions.PlayOneShot(finishSFX);
-
-        // TODO - add particle vfx
         other.GetComponentInChildren<ParticleSystem>().Play();
-
         Invoke("NextScene", sceneChangeDelay);
     }
 
@@ -75,7 +72,7 @@ public class CollisionHandler : MonoBehaviour
 
     private void PickupFeather(Collider other)
     {
-        // TODO - refill boost
+        // TODO - refill boost and add boost limit
         other.GetComponentInChildren<ParticleSystem>().Play();
         audioSourceCollisions.PlayOneShot(pickupSFX);
         //Destroy(other.gameObject);
