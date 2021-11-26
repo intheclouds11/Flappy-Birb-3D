@@ -9,8 +9,9 @@ public class Movement : MonoBehaviour
     [SerializeField] private float flapStrength = 100f;
     [SerializeField] private float rotateAmount = 1f;
 
-    private AudioSource[] audioSources;
+    private AudioSource[] audioSources;  // only used to grab the first AudioSource component
     private AudioSource audioSourceMovement;
+    private AudioSource audioSourceCollisions;
     [SerializeField] AudioClip flapTapSFX;
     [SerializeField] private AudioClip flapBoostSFX;
     private Rigidbody rb;
@@ -22,6 +23,7 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         audioSources = GetComponents<AudioSource>();
         audioSourceMovement = audioSources[0];
+        audioSourceCollisions = audioSources[1];
     }
 
     void Update() // do Input and Graphics updates here
@@ -35,8 +37,8 @@ public class Movement : MonoBehaviour
         PlayerInputRotate();
     }
 
-    // GetKeyDown does something at the single frame the key is pressed at (tap)
-    // GetKey does something as long as the key is pressed (hold)
+    // GetKeyDown does something at the single frame the key is pressed at. ("tap")
+    // GetKey does something as long as the key is pressed. ("hold")
 
     void PlayerInputFlap()
     {

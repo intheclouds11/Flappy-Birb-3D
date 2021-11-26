@@ -7,21 +7,30 @@ using UnityEngine.SceneManagement;
 public class CollisionHandler : MonoBehaviour
 {
     private float sceneChangeDelay = 2f;
-    
-    private AudioSource[] audioSources;
+
+    private AudioSource[] audioSources; // only used to grab the second AudioSource component
     private AudioSource audioSourceCollisions;
+    private AudioSource audioSourceMovement;
     [SerializeField] AudioClip finishSFX;
     [SerializeField] AudioClip crashSFX;
     [SerializeField] AudioClip pickupSFX;
 
+    private bool isTransitioning = false;
+
     void Start()
     {
         audioSources = GetComponents<AudioSource>();
+        audioSourceMovement = audioSources[0];
         audioSourceCollisions = audioSources[1];
     }
 
     private void OnCollisionEnter(Collision other)
     {
+        if (isTransitioning)
+        {
+            return;
+        }
+
         if (other.gameObject.CompareTag("Obstacle"))
         {
             CrashSequence();
@@ -35,16 +44,24 @@ public class CollisionHandler : MonoBehaviour
 
     private void CrashSequence()
     {
+        isTransitioning = true;
+        audioSourceMovement.Stop();
         audioSourceCollisions.PlayOneShot(crashSFX);
+        GetComponent<Movement>().enabled = false; // disable controls when crash
+
         // TODO - add particle vfx
-        GetComponent<Movement>().enabled = false;
+
         Invoke("ResetScene", sceneChangeDelay);
     }
 
     private void FinishSequence()
     {
+        isTransitioning = true;
+        audioSourceMovement.Stop();
         audioSourceCollisions.PlayOneShot(finishSFX);
+
         // TODO - add particle vfx
+
         Invoke("NextScene", sceneChangeDelay);
     }
 
