@@ -872,6 +872,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1339629772, guid: 59b42bccb63736241b663fd52e69d8ac, type: 3}
+      propertyPath: flapBoostParticles
+      value: 
+      objectReference: {fileID: 1351459325}
     - target: {fileID: 951425511843487014, guid: 59b42bccb63736241b663fd52e69d8ac, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -920,8 +924,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Birb
       objectReference: {fileID: 0}
+    - target: {fileID: 7846839409535114184, guid: 59b42bccb63736241b663fd52e69d8ac, type: 3}
+      propertyPath: m_Name
+      value: FlapBoost Particles
+      objectReference: {fileID: 0}
+    - target: {fileID: 7951577004360007548, guid: 59b42bccb63736241b663fd52e69d8ac, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7951577004360007548, guid: 59b42bccb63736241b663fd52e69d8ac, type: 3}
+      propertyPath: ShapeModule.m_Rotation.x
+      value: 84.77
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59b42bccb63736241b663fd52e69d8ac, type: 3}
+--- !u!198 &1351459325 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7951577004360007548, guid: 59b42bccb63736241b663fd52e69d8ac, type: 3}
+  m_PrefabInstance: {fileID: 1351459324}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1363201911 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c09f5f8842e324b42853f5cc1a2f0e17, type: 3}

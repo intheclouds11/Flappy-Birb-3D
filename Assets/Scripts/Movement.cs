@@ -14,6 +14,7 @@ public class Movement : MonoBehaviour
     private AudioSource audioSourceCollisions;
     [SerializeField] AudioClip flapTapSFX;
     [SerializeField] private AudioClip flapBoostSFX;
+    [SerializeField] private ParticleSystem flapBoostParticles;
     private Rigidbody rb;
 
     private bool hasFlapped = false;
@@ -56,6 +57,7 @@ public class Movement : MonoBehaviour
         {
             rb.AddRelativeForce(Vector3.up * boostAmount * Time.deltaTime);
             audioSourceMovement.clip = flapBoostSFX;
+            flapBoostParticles.Play();
 
             if (!audioSourceMovement.isPlaying)
             {
