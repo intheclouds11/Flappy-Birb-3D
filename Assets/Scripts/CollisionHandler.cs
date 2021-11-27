@@ -17,6 +17,7 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] ParticleSystem explosionParticles;
 
     private bool isTransitioning = false;
+    private bool isNoClip = false;
 
     void Start()
     {
@@ -27,7 +28,25 @@ public class CollisionHandler : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.L)) // CHEAT - skip level
+        RespondToDebugKey();
+    }
+
+    private void RespondToDebugKey()
+    {
+        if (Input.GetKeyDown(KeyCode.C)) // CHEAT - noclip
+        {
+            isNoClip = !isNoClip; // *** this is how you toggle something ***
+            if (isNoClip)
+            {
+                GetComponentInChildren<BoxCollider>().enabled = false;
+            }
+            else
+            {
+                GetComponentInChildren<BoxCollider>().enabled = true;
+            }
+        }
+        
+        if (Input.GetKeyDown(KeyCode.L)) // CHEAT - skip level
         {
             NextScene();
         }
@@ -35,7 +54,7 @@ public class CollisionHandler : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (isTransitioning)
+        if (isTransitioning) // Prevents anything from happening after collision
         {
             return;
         }
@@ -81,10 +100,10 @@ public class CollisionHandler : MonoBehaviour
     private void PickupFeather(Collider other)
     {
         // TODO - refill boost and add boost limit
-        
+
         other.gameObject.GetComponent<MeshRenderer>().enabled = false;
         other.gameObject.GetComponent<CapsuleCollider>().enabled = false;
-        
+
         other.GetComponentInChildren<ParticleSystem>().Play();
         audioSourceCollisions.PlayOneShot(pickupSFX);
     }

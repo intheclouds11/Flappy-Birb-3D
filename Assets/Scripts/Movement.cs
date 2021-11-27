@@ -18,7 +18,6 @@ public class Movement : MonoBehaviour
     private Rigidbody rb;
 
     private bool hasFlapped = false;
-    private bool isNoClip = false;
 
     void Start()
     {
@@ -31,19 +30,6 @@ public class Movement : MonoBehaviour
     void Update() // do Input and Graphics updates here
     {
         PlayerInputForce();
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            if (!isNoClip)
-            {
-                GetComponentInChildren<BoxCollider>().enabled = false;
-                isNoClip = true;
-            }
-            else
-            {
-                GetComponentInChildren<BoxCollider>().enabled = true;
-                isNoClip = false;
-            }
-        }
     }
 
     private void FixedUpdate() // do Physics engine updates here
