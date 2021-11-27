@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class SpawnObstacle : MonoBehaviour
 {
-    private float currentGameTime = 0;
     [SerializeField] float delayTime = 1f;
 
     void Start()
