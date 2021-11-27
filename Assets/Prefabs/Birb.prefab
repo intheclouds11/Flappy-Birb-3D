@@ -29,6 +29,7 @@ Transform:
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 951425511843487014}
   m_RootOrder: 0
@@ -129,6 +130,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.034, y: 0.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 426914442}
   - {fileID: 3623335705495140568}
@@ -174,10 +176,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boostAmount: 1500
-  flapStrength: 15000
+  flapStrength: 10000
   rotateAmount: 200
   flapTapSFX: {fileID: 8300000, guid: 77851d09d9b79cd4d924baba5587976e, type: 3}
   flapBoostSFX: {fileID: 8300000, guid: b2f1f3996499d8c4199151793b3c9b3d, type: 3}
+  flapBoostParticles: {fileID: 7951577004360007548}
 --- !u!114 &6804627156034562805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,14 +303,14 @@ AudioReverbZone:
   m_Enabled: 1
   m_MinDistance: 10
   m_MaxDistance: 15
-  m_ReverbPreset: 10
+  m_ReverbPreset: 7
   m_Room: -1000
-  m_RoomHF: -698
-  m_DecayTime: 7.24
-  m_DecayHFRatio: 0.33
-  m_Reflections: -1166
+  m_RoomHF: -476
+  m_DecayTime: 4.32
+  m_DecayHFRatio: 0.59
+  m_Reflections: -789
   m_ReflectionsDelay: 0.02
-  m_Reverb: 16
+  m_Reverb: -289
   m_ReverbDelay: 0.03
   m_HFReference: 5000
   m_Diffusion: 100
@@ -438,6 +441,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0.45275152, w: 0.8916368}
   m_LocalPosition: {x: -0.0315, y: 0.0312, z: 0}
   m_LocalScale: {x: 0.02264453, y: 0.06734566, z: 0.040757827}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 951425511843487014}
   m_RootOrder: 1
@@ -589,14 +593,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab79a37535b979f48b6de56e3a0a5cb0, type: 3}
---- !u!4 &5419014273004093362 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4436899185823514, guid: ab79a37535b979f48b6de56e3a0a5cb0, type: 3}
-  m_PrefabInstance: {fileID: 5421198788021596328}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &5331098373376982632 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 198204746014789312, guid: ab79a37535b979f48b6de56e3a0a5cb0, type: 3}
+  m_PrefabInstance: {fileID: 5421198788021596328}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5419014273004093362 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4436899185823514, guid: ab79a37535b979f48b6de56e3a0a5cb0, type: 3}
   m_PrefabInstance: {fileID: 5421198788021596328}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7369189950153580830
@@ -607,12 +611,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 951425511843487014}
     m_Modifications:
     - target: {fileID: 584678573886053986, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 584678573886053986, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
       propertyPath: ShapeModule.angle
       value: 28.38
       objectReference: {fileID: 0}
     - target: {fileID: 584678573886053986, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
       propertyPath: ShapeModule.m_Rotation.x
-      value: 18.25
+      value: 84.77
       objectReference: {fileID: 0}
     - target: {fileID: 584678573886053986, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
       propertyPath: ShapeModule.m_Rotation.y
@@ -635,6 +643,22 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 584678573886053986, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 0.49019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 584678573886053986, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 584678573886053986, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 584678573886053986, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 584678573886053986, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
       propertyPath: InitialModule.startSpeed.minMaxState
       value: 3
       objectReference: {fileID: 0}
@@ -648,7 +672,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 0d85d7e5e8a4f7347b73f444af344baf, type: 2}
     - target: {fileID: 765908706338028246, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
       propertyPath: m_Name
-      value: Side Thruster Particles
+      value: FlapBoost Particles
       objectReference: {fileID: 0}
     - target: {fileID: 771087676723270698, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
       propertyPath: m_RootOrder
@@ -699,5 +723,10 @@ PrefabInstance:
 --- !u!4 &7852002995205961012 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 771087676723270698, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
+  m_PrefabInstance: {fileID: 7369189950153580830}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7951577004360007548 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 584678573886053986, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
   m_PrefabInstance: {fileID: 7369189950153580830}
   m_PrefabAsset: {fileID: 0}
