@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
-    private float sceneChangeDelay = 2f;
+    [SerializeField] private float sceneChangeDelay = 2f;
+    [SerializeField] private float boostRefillAmount = 0.5f;
 
     private AudioSource[] audioSources; // only used to grab the second AudioSource component
     private AudioSource audioSourceCollisions;
@@ -75,7 +76,7 @@ public class CollisionHandler : MonoBehaviour
         isTransitioning = true;
         audioSourceMovement.Stop();
         audioSourceCollisions.PlayOneShot(crashSFX);
-        GetComponent<Movement>().enabled = false; // disable controls when crash
+        GetComponent<PlayerMovement>().enabled = false; // disable controls when crash
         explosionParticles.Play();
         Invoke("ResetScene", sceneChangeDelay);
     }
@@ -99,8 +100,8 @@ public class CollisionHandler : MonoBehaviour
 
     private void PickupFeather(Collider other)
     {
-        // TODO - refill boost and add boost limit
-
+        GetComponent<PlayerMovement>().currentBoostLevel += boostRefillAmount;
+        
         other.gameObject.GetComponent<MeshRenderer>().enabled = false;
         other.gameObject.GetComponent<CapsuleCollider>().enabled = false;
 

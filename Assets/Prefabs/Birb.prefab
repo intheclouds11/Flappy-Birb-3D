@@ -173,9 +173,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14524f55fc08e054487aafe5ef6c7d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boostAmount: 1500
+  boostAmount: 2500
   flapStrength: 12000
   rotateAmount: 200
+  currentBoostLevel: 0
   flapTapSFX: {fileID: 8300000, guid: 77851d09d9b79cd4d924baba5587976e, type: 3}
   flapBoostSFX: {fileID: 8300000, guid: b2f1f3996499d8c4199151793b3c9b3d, type: 3}
   flapBoostParticles: {fileID: 7951577004360007548}
@@ -191,6 +192,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a342fdc472e25a41b9af83a67a29bfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneChangeDelay: 2
+  boostRefillAmount: 0.5
   finishSFX: {fileID: 8300000, guid: 5c959748375d8b94a8a0c18cdfd02c9f, type: 3}
   crashSFX: {fileID: 8300000, guid: 94f5cdcc28a96694795927777ba99b16, type: 3}
   pickupSFX: {fileID: 8300000, guid: 927b5df856868b84b827ff62b4f6aaf7, type: 3}

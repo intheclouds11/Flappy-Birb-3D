@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float boostAmount = 0.05f;
     [SerializeField] private float flapStrength = 100f;
     [SerializeField] private float rotateAmount = 1f;
+    [SerializeField] public float currentBoostLevel = 0f;
 
     private AudioSource[] audioSources; // only used to grab the first AudioSource component
     private AudioSource audioSourceMovement;
@@ -84,13 +85,17 @@ public class Movement : MonoBehaviour
 
     void ApplyBoostForce()
     {
-        rb.AddRelativeForce(Vector3.up * boostAmount * Time.deltaTime);
-        audioSourceMovement.clip = flapBoostSFX;
-        flapBoostParticles.Play();
-
-        if (!audioSourceMovement.isPlaying)
+        if (currentBoostLevel > 0)
         {
-            audioSourceMovement.Play();
+            rb.AddRelativeForce(Vector3.up * boostAmount * Time.deltaTime);
+            audioSourceMovement.clip = flapBoostSFX;
+            flapBoostParticles.Play();
+            currentBoostLevel -= 1 * Time.deltaTime;
+
+            if (!audioSourceMovement.isPlaying)
+            {
+                audioSourceMovement.Play();
+            }
         }
     }
 
