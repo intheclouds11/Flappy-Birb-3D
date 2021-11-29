@@ -104,6 +104,7 @@ public class CollisionHandler : MonoBehaviour
         
         other.gameObject.GetComponent<MeshRenderer>().enabled = false;
         other.gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        other.gameObject.GetComponentInChildren<Light>().enabled = false;
 
         other.GetComponentInChildren<ParticleSystem>().Play();
         audioSourceCollisions.PlayOneShot(pickupSFX);

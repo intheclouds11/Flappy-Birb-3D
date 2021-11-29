@@ -52,10 +52,11 @@ public class PlayerMovement : MonoBehaviour
             ApplyBoostForce();
         }
 
-        // Stop boost audio
+        // Stop boost audio and jetpack light
         if (Input.GetKeyUp(KeyCode.B))
         {
             audioSourceMovement.Stop();
+            GetComponentInChildren<Light>().enabled = false;
         }
     }
 
@@ -90,12 +91,18 @@ public class PlayerMovement : MonoBehaviour
             rb.AddRelativeForce(Vector3.up * boostAmount * Time.deltaTime);
             audioSourceMovement.clip = flapBoostSFX;
             flapBoostParticles.Play();
+            GetComponentInChildren<Light>().enabled = true; // jetpack light
             currentBoostLevel -= 1 * Time.deltaTime;
 
             if (!audioSourceMovement.isPlaying)
             {
                 audioSourceMovement.Play();
             }
+        }
+        else
+        {
+            audioSourceMovement.Stop();
+            GetComponentInChildren<Light>().enabled = false; // jetpack light off
         }
     }
 
