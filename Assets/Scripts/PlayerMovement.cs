@@ -99,7 +99,8 @@ public class PlayerMovement : MonoBehaviour
                 audioSourceMovement.Play();
             }
         }
-        else
+
+        if (currentBoostLevel < 0.05 && currentBoostLevel > Mathf.Epsilon)
         {
             audioSourceMovement.Stop();
             GetComponentInChildren<Light>().enabled = false; // jetpack light off

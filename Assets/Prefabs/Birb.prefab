@@ -269,7 +269,7 @@ MonoBehaviour:
   boostAmount: 2500
   flapStrength: 12000
   rotateAmount: 200
-  currentBoostLevel: 0
+  currentBoostLevel: 0.5
   flapTapSFX: {fileID: 8300000, guid: 77851d09d9b79cd4d924baba5587976e, type: 3}
   flapBoostSFX: {fileID: 8300000, guid: b2f1f3996499d8c4199151793b3c9b3d, type: 3}
   flapBoostParticles: {fileID: 7951577004360007548}

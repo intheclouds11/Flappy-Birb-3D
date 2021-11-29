@@ -16,14 +16,18 @@ public class Oscillator : MonoBehaviour
 
     void Update()
     {
+        if (period <= Mathf.Epsilon)
+        {
+            return;
+        }
+
         float cycles = Time.time / period; // continually growing over time
-        
         const float tau = 2 * Mathf.PI; // total radians in a circle
         float rawSinWave = Mathf.Sin(cycles * tau); // oscillate from -1 to 1
-
+        
         //movementFactor = (rawSinWave + 1) / 2; // recalc to go from 0 to 1, cleaner looking
         movementFactor = rawSinWave;
-        
+
         Vector3 offset = movementVector * movementFactor;
         transform.position = startingPosition + offset;
     }

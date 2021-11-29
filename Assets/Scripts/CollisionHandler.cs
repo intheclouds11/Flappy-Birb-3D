@@ -96,6 +96,11 @@ public class CollisionHandler : MonoBehaviour
         {
             PickupFeather(other);
         }
+
+        if (other.gameObject.CompareTag("Obstacle Trigger")) // trolley speed up
+        {
+            other.GetComponentInParent<CarObstacle>().obstacleSpeedZ = -0.1f;
+        }
     }
 
     private void PickupFeather(Collider other)
